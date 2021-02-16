@@ -4,6 +4,8 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
@@ -20,7 +22,8 @@ public class Producer {
         Future<RecordMetadata> send = kafkaProducer.send(record);
         try {
             RecordMetadata recordMetadata = send.get();
-            System.out.println(recordMetadata.offset()+"--topic"+recordMetadata.topic());
+            System.out.println("偏移量："+recordMetadata.offset()+" --topic:"+recordMetadata.topic());
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
