@@ -8,12 +8,12 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
-public class Cousmer {
+/**
+ * 独立消费者
+ */
+public class OneCousmer {
 
     public static void main(String args[]) {
         Properties properties = new Properties();
@@ -21,13 +21,13 @@ public class Cousmer {
         properties.setProperty("key.deserializer", StringDeserializer.class.getName());
         properties.setProperty("value.deserializer", StringDeserializer.class.getName());
         properties.setProperty("enable.auto.commit", "false");
-        properties.setProperty("group.id", "1111");
 
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
-        kafkaConsumer.subscribe(Collections.singletonList("test-topic"));
-        Map<TopicPartition, OffsetAndMetadata> offsets=new HashMap<>();
-        offsets.put(new TopicPartition("test-topic",5),new OffsetAndMetadata(0,"userID"));
+        List<TopicPartition> list=new ArrayList<>();
+        list.add(new TopicPartition("test-topic",7));
+//        kafkaConsumer.subscribe(Collections.singletonList("test-topic"));
+        kafkaConsumer.assign(list);
         try {
             while (true) {
                 ConsumerRecords<String, String> poll = kafkaConsumer.poll(500);
@@ -36,9 +36,7 @@ public class Cousmer {
 
                 }
                 //异步提交偏移量
-//                kafkaConsumer.commitAsync();
-                //手动指定同步的偏移量（不建议，容易丢失数据）
-//                kafkaConsumer.commitSync(offsets);
+                kafkaConsumer.commitAsync();
             }
         } catch (Exception e) {
             e.printStackTrace();

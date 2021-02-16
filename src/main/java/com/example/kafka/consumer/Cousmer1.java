@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class Cousmer {
+public class Cousmer1 {
 
     public static void main(String args[]) {
         Properties properties = new Properties();
@@ -36,7 +36,7 @@ public class Cousmer {
 
                 }
                 //异步提交偏移量
-//                kafkaConsumer.commitAsync();
+                kafkaConsumer.commitAsync();
                 //手动指定同步的偏移量（不建议，容易丢失数据）
 //                kafkaConsumer.commitSync(offsets);
             }

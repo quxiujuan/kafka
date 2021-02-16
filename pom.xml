@@ -54,11 +54,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.kafka</groupId>-->
-<!--            <artifactId>kafka_2.10</artifactId>-->
-<!--            <version>0.10.2.1</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.10</artifactId>
+            <version>0.10.2.1</version>
+        </dependency>
         <!--  log4j12日志适配器 -->
 <!--        <dependency> &lt;!&ndash; 引入log4j2依赖 &ndash;&gt;-->
 <!--            <groupId>org.springframework.boot</groupId>-->

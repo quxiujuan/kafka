@@ -19,7 +19,9 @@ public class Producer {
         properties.setProperty("value.serializer", StringSerializer.class.getName());
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(properties);
         ProducerRecord<String, String> record = new ProducerRecord<String, String>("test-topic", "create.key", "ren");
+        ProducerRecord<String, String> record1 = new ProducerRecord<String, String>("test-topic", "1", "juan");
         Future<RecordMetadata> send = kafkaProducer.send(record);
+        Future<RecordMetadata> send1 = kafkaProducer.send(record1);
         try {
             RecordMetadata recordMetadata = send.get();
             System.out.println("偏移量："+recordMetadata.offset()+" --topic:"+recordMetadata.topic());
